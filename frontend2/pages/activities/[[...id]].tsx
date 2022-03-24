@@ -1,15 +1,13 @@
 import { useRouter } from 'next/router';
 import ActivityForm from '../../components/activities/activityForm';
 
-const ActivityPage =() => {
+const ActivityPage = (): JSX.Element => {
 	const router = useRouter();
-
-	console.log(router.query);
 
 	return (
 		<div>
 			<ActivityForm
-
+				activityId={ router.query.id }
 			/>
 		</div>
 	)

@@ -1,7 +1,9 @@
 import { useRouter } from 'next/router';
 import axios from 'axios'
 
-
+import Todo from '../../../components/todos/todo';
+import CreateTodo from '../../../components/todos/createTodo';
+import activity from '../../../components/activities/activity';
 
 const ActivityTodosPage = () => {
 	const router = useRouter();

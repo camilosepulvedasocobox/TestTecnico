@@ -4,9 +4,15 @@ import Link from 'next/link';
 
 import Activity from './activity';
 
-const ActivitiesList = (props) => {
+type SelectElement = React.FormEvent<HTMLSelectElement>;
+interface IFilter {
+	creacion: string;
+	resueltas: string;
+}
+
+const ActivitiesList = (): JSX.Element => {
 	const [activities, setActivities] = useState([]);
-	const [filters, setFilters] = useState({
+	const [filters, setFilters] = useState<IFilter>({
 		creacion: '0',
 		resueltas: '0'
 	});
@@ -23,7 +29,7 @@ const ActivitiesList = (props) => {
 		getActivities();
 	},[]);
 
-	const deleteActivity = async (id) => {
+	const deleteActivity = async (id: string) => {
 		if (window.confirm("¿Está seguro de eliminar la actividad?")) {
 			await axios.delete('http://localhost:4000/api/activities/' + id);
 		
@@ -31,10 +37,10 @@ const ActivitiesList = (props) => {
 		}
 	}
 
-	const onInputChange = (e) => {
+	const onInputChange = (e: SelectElement): void => {
 		setFilters({
 			...filters,
-			[e.target.name] : e.target.value
+			[e.currentTarget.name] : e.currentTarget.value
 		});
 	}
 
