@@ -8,6 +8,8 @@ router.route('/:id')
 	.get(getTodos)
 	.get(getTodo)
 	.put(updateTodo)
+
+router.route('/:id/:activity')
 	.delete(deleteTodo)
 
 module.exports = router;

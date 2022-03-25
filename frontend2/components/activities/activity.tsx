@@ -11,7 +11,7 @@ const Activity = (props): JSX.Element => {
 	const { activity } = props;
 
 	return (
-		<div className="col-md-4">
+		<div className="col-md-4" style={props.style}>
 			<div className="card mt-4">
 				<div className="card-header">
 					<h3>{activity.title}</h3>

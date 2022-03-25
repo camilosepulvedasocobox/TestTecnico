@@ -74,7 +74,7 @@ todosCtrl.updateTodo = async (req, res) => {
 }
 
 todosCtrl.deleteTodo = async (req, res) => {
-	const { activity } = req.body
+	const activity = req.params.activity;
 	await Todo.findByIdAndDelete(req.params.id);
 
 	await Activity.findOneAndUpdate({_id: activity}, {
