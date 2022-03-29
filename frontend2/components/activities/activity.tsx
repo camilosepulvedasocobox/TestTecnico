@@ -3,15 +3,24 @@ import { format, register } from 'timeago.js';
 import Link from 'next/link';
 import es_ES from 'timeago.js/lib/lang/es'
 
+import { IActivity } from '../../interfaces/Activity';
+
 register('es_ES', es_ES);
 const timeago = timestamp => format(timestamp, 'es_ES');
 
-const Activity = (props): JSX.Element => {
+interface Props {
+	activity: IActivity;
+	deleteActivity?: (id: string) => void;
+	interaccion?: boolean
+	style?: object
+}
+
+const Activity = (props: Props): JSX.Element => {
 
 	const { activity } = props;
 
 	return (
-		<div className="col-md-4" style={props.style}>
+		<div className="col-md-4" style={props.style && props.style}>
 			<div className="card mt-4">
 				<div className="card-header">
 					<h3>{activity.title}</h3>
@@ -20,7 +29,7 @@ const Activity = (props): JSX.Element => {
 					<p>{activity.description}</p>
 					<p className='text-muted'>Tareas completadas: { activity.todos.filter(todo => todo.completed).length } / { activity.todos.length }</p>
 					<p className='font-weight-light'>Creación: { timeago(activity.createdAt) } </p>
-					<p className='font-weight-light'>Finalización: { typeof activity.finish_date !== 'undefined' ? timeago(activity.finish_date) : '' } </p>
+					<p className='font-weight-light'>Finalización: { activity.finish_date && timeago(activity.finish_date) } </p>
 				</div>
 				{ props.interaccion && (
 					<div className='card-footer'>
@@ -35,7 +44,7 @@ const Activity = (props): JSX.Element => {
 									Editar
 								</a>
 							</Link>
-							<button className='btn btn-danger' onClick={ props.deleteActivity.bind(this, activity._id) }>
+							<button className='btn btn-danger' onClick={ props.deleteActivity && props.deleteActivity.bind(this, activity._id) }>
 								Eliminar
 							</button>
 						</div>

@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-const Todo = (props): JSX.Element => {
+import { ITodo } from '../../interfaces/Todo';
+
+interface Props {
+	todo: ITodo;
+	getTodos: () => void;
+	activity: string | string[];
+}
+
+const Todo = (props: Props): JSX.Element => {
 
 	const { todo } = props;
 

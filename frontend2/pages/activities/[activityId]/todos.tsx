@@ -6,22 +6,7 @@ import Todo from '../../../components/todos/todo';
 import CreateTodo from '../../../components/todos/createTodo';
 import Activity from '../../../components/activities/activity';
 
-interface ITodo {
-	_id: string;
-	description: string;
-	completed: boolean;
-	file: string;
-	createdAt: string | Date;
-	updatedAt: string | Date;
-	__v: number;
-}
-interface IActivity {
-	title: string;
-	description: string;
-	createdAt: string | Date;
-	finish_date: string | Date;
-	todos: ITodo[]
-}
+import { IActivity } from '../../../interfaces/Activity'
 
 const ActivityTodosPage = (): JSX.Element => {
 	const router = useRouter();
@@ -30,8 +15,8 @@ const ActivityTodosPage = (): JSX.Element => {
 	const [activity, setActivity] = useState<IActivity>({
 		title: '',
 		description: '',
-		createdAt: '',
-		finish_date: '',
+		createdAt: null,
+		finish_date: null,
 		todos: []
 	});
 
@@ -49,8 +34,7 @@ const ActivityTodosPage = (): JSX.Element => {
 			<div className="row">
 				<Activity
 					activity = { activity }
-					key = { activityId }
-					deleteActivity = { () => {} }
+					deleteActivity = { (activityId) => {} }
 					interaccion = { false }
 					style={{"marginTop": "-1.5rem"}}
 				/>

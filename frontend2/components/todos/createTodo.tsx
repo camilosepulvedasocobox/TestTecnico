@@ -4,7 +4,12 @@ import axios from 'axios';
 type InputElement = React.FormEvent<HTMLInputElement>;
 type FormElement = React.FormEvent<HTMLFormElement>
 
-const CreateTodo = (props): JSX.Element => {
+interface Props {
+	activity: string | string[];
+	getTodos: () => void;
+}
+
+const CreateTodo = (props: Props): JSX.Element => {
 
 	const [description, setDescription] = useState<string>('');
 	const [file, setFile] = useState(null);

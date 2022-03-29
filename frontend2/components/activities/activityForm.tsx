@@ -4,7 +4,11 @@ import { useRouter } from 'next/router';
 
 type FormElement = React.FormEvent<HTMLFormElement>;
 
-const ActivityForm = (props): JSX.Element => {
+interface Props {
+	activityId: string | string[];
+}
+
+const ActivityForm = (props: Props): JSX.Element => {
 
 	const router = useRouter();
 
@@ -12,7 +16,7 @@ const ActivityForm = (props): JSX.Element => {
 	const [description, setDescription] = useState<string>('')
 	const [_id, setId] = useState<string>('')
 
-	const fetchMyAPI = async (id): Promise<void> => {
+	const fetchMyAPI = async (id: string | string[]): Promise<void> => {
 		const res = await axios.get('http://localhost:4000/api/activities/' + id);
 		
 		setTitle(res.data.title)
@@ -21,10 +25,10 @@ const ActivityForm = (props): JSX.Element => {
 	}
 
 	useEffect(() => {
-		if (typeof props.activityId !== "undefined") {
+		if (props.activityId) {
 			fetchMyAPI(props.activityId);
 		}
-	}, [])
+	}, [props.activityId])
 
 	const onSubmit = async (e: FormElement) => {
 		e.preventDefault();
